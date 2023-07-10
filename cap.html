@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cap.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>  
+
+    <title>captcher</title>
+</head>
+<body>
+
+    <h1>Captcha Validation</h1>
+    <div class="container">
+      <form action="">
+        <input type="text" id="captchaText" class="block">
+        <input type="text" id="captchaEnter" class="block">
+        <input type="button" value="Refresh" id="refreshbtn" class="btn">
+        <input type="button" value="check" id="checkbtn" class="btn">
+      </form>
+    </div>
+    <script>
+      
+      let captchaText = document.getElementById("captchaText");
+      let captchaEnter = document.getElementById("captchaEnter");
+      let refreshbtn = document.getElementById("refreshbtn");
+      let checkbtn = document.getElementById("checkbtn");
+      let chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      let captcha
+
+      function generateCaptcha(){
+         captcha = ""
+        for(i=0;i<7;i++){
+
+          //we can use the math() merhod for recognizing chars length 
+          // In math() we can use math.floor cause floor can convert the dacimal to string
+          //after that we can use math.Random cause Random can pick random char from the given chars,the chars values can add to an index variable
+          let index = Math.floor(Math.random()*chars.length);
+          captcha = captcha+chars[index]
+         
+        }
+        captchaText.value = captcha
+
+      }
+      function ValidateCaptcha(){
+        if(captcha == captchaEnter.value){
+          alert("valid captcha !! success");
+         
+          
+        }
+        else{
+          alert("invalid captcha ! try again ");
+         
+            
+          captchaEnter.value =""
+        }
+
+      }
+      generateCaptcha()
+
+      refreshbtn.onclick = generateCaptcha;
+      checkbtn.onclick = ValidateCaptcha;
+    </script>
+</body>
+</html>
